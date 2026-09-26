@@ -102,6 +102,25 @@ export default function Home() {
         <div className="toolbar"><label className="search"><span className="sr-only">Search records</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search unit, SKU, charge type..." /></label><select value={filter} onChange={(event) => setFilter(event.target.value)} aria-label="Filter by report type"><option value="all">All report types</option><option value="fee_report">Fee reports</option><option value="inventory_adjustment">Inventory adjustments</option><option value="reimbursement_report">Reimbursements</option></select></div>
         <div className="table-wrap"><table><thead><tr><th>Line</th><th>Unit</th><th>Charge</th><th>SKU</th><th>Report</th><th>Amount</th><th>Posted</th><th>Decision</th></tr></thead><tbody>{filteredRows.map((row, index) => { const lineId = field(row, "line_id", "line", "id") || String(index + 1); const unitId = field(row, "unit_id", "unit", "unit id"); const chargeType = field(row, "charge_type", "charge", "charge type"); const sku = field(row, "sku", "item", "item sku"); const reportType = field(row, "report_type", "report type", "type"); const amount = field(row, "amount_usd", "amount", "amount usd"); const postedDate = field(row, "posted_date", "posted", "posted date", "date"); return <tr key={`${lineId}-${index}`}><td className="mono">{lineId}</td><td className="mono">{unitId || "Not provided"}</td><td>{label(chargeType) || "Not provided"}</td><td className="mono">{sku || "Not provided"}</td><td><span className="tag">{label(reportType) || "Uncategorized"}</span></td><td className="amount">{formatMoney(Number(amount.replace(/[$,]/g, "") || 0))}</td><td>{postedDate || "Not provided"}</td><td><span className="decision">Needs review</span></td></tr> })}</tbody></table>{!filteredRows.length && <div className="empty">No records match the current search.</div>}</div>
       </section>
+
+      <section className="panel secondary-panel" id="reports" aria-labelledby="reports-heading">
+        <div className="panel-heading"><div><h2 id="reports-heading">Reports</h2><p>Report types currently present in the loaded dataset.</p></div><span className="record-count">{new Set(rows.map((row) => field(row, "report_type", "report type", "type")).filter(Boolean)).size} types</span></div>
+        <div className="report-list">
+          {Array.from(new Set(rows.map((row) => field(row, "report_type", "report type", "type")).filter(Boolean))).map((reportType) => {
+            const reportRows = rows.filter((row) => field(row, "report_type", "report type", "type") === reportType)
+            return <a className="report-item" href="#review" key={reportType} onClick={() => setFilter(reportType)}><span>{label(reportType)}</span><strong>{reportRows.length} {reportRows.length === 1 ? "row" : "rows"}</strong></a>
+          })}
+          {!rows.length && <div className="empty">Load a CSV to view its report types.</div>}
+        </div>
+      </section>
+
+      <section className="panel secondary-panel" id="evidence" aria-labelledby="evidence-heading">
+        <div className="panel-heading"><div><h2 id="evidence-heading">Evidence sources</h2><p>Files and fields used to review the current records.</p></div><span className="record-count">{uploadedName ? "Uploaded file" : "API dataset"}</span></div>
+        <div className="evidence-list">
+          <div className="evidence-item"><span className="evidence-status" aria-hidden="true" /> <div><strong>{uploadedName || "Current fee report"}</strong><p>{uploadedName ? "Uploaded CSV currently loaded in this review session." : "Records loaded from the fee report API."}</p></div></div>
+          <div className="evidence-item"><span className="evidence-status" aria-hidden="true" /> <div><strong>Record fields</strong><p>Unit, charge, SKU, report type, amount, and posted date are shown when provided by the source.</p></div></div>
+        </div>
+      </section>
       <footer>Recovery Manager only recommends a claim when available evidence supports the charge decision. Unsupported or missing evidence stays in review.</footer>
     </section>
   </main>
