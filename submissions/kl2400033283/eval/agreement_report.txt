@@ -1,0 +1,36 @@
+RecoverIQ Reviewer Agreement Report
+===================================
+
+Evaluation cases: 50
+
+IMPORTANT:
+These labels are synthetic reviewer simulations.
+They are NOT independent human ground truth.
+
+Reviewer A distribution:
+SUPPORTED    : 6
+CONTRADICTED : 13
+UNCERTAIN    : 31
+
+Reviewer B distribution:
+SUPPORTED    : 5
+CONTRADICTED : 13
+UNCERTAIN    : 32
+
+Observed agreement:
+0.9800
+98.00%
+
+Cohen's kappa:
+0.9618
+
+Disagreements:
+1
+
+Disagreement case IDs:
+EVAL-007
+
+Interpretation:
+The agreement statistics describe consistency between the
+two synthetic reviewer simulations. They must not be presented
+as human-review agreement or as independent ground truth.

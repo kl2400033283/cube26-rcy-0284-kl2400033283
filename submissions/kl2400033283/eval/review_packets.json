@@ -1,0 +1,1417 @@
+[
+  {
+    "eval_case_id": "EVAL-001",
+    "unit_id": "UNIT-0101",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 1.5
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0101",
+        "unit_id": "UNIT-0101",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0101/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-002",
+    "unit_id": "UNIT-0102",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0102",
+        "unit_id": "UNIT-0102",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 44,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0102/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-003",
+    "unit_id": "UNIT-0103",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 12.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0103",
+        "unit_id": "UNIT-0103",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-004",
+    "unit_id": "UNIT-0104",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 6.35
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0104",
+        "unit_id": "UNIT-0104",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0104",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0104/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-005",
+    "unit_id": "UNIT-0105",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0105",
+        "unit_id": "UNIT-0105",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0105",
+        "identity_match": "unknown",
+        "parts_list": "",
+        "parts_missing": "",
+        "observed_state": "",
+        "amazon_condition": "",
+        "operator_disposition": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-006",
+    "unit_id": "UNIT-0106",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 1.5
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0106",
+        "unit_id": "UNIT-0106",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "unknown",
+        "unit_damage": "unknown",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-007",
+    "unit_id": "UNIT-0107",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0107",
+        "unit_id": "UNIT-0107",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0107/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-008",
+    "unit_id": "UNIT-0108",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 12.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0108",
+        "unit_id": "UNIT-0108",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-009",
+    "unit_id": "UNIT-0109",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 3.5
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0109",
+        "unit_id": "UNIT-0109",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0109",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0109/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-010",
+    "unit_id": "UNIT-0110",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0110",
+        "unit_id": "UNIT-0110",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0110",
+        "identity_match": "unknown",
+        "parts_list": "",
+        "parts_missing": "",
+        "observed_state": "",
+        "amazon_condition": "",
+        "operator_disposition": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-011",
+    "unit_id": "UNIT-0111",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 2.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0111",
+        "unit_id": "UNIT-0111",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "unknown",
+        "unit_damage": "unknown",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-012",
+    "unit_id": "UNIT-0112",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0112",
+        "unit_id": "UNIT-0112",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0112/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-013",
+    "unit_id": "UNIT-0113",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 14.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0113",
+        "unit_id": "UNIT-0113",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-014",
+    "unit_id": "UNIT-0114",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 6.35
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0114",
+        "unit_id": "UNIT-0114",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0114",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0114/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-015",
+    "unit_id": "UNIT-0115",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0115",
+        "unit_id": "UNIT-0115",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0115",
+        "identity_match": "yes",
+        "parts_list": "complete",
+        "parts_missing": "",
+        "observed_state": "factory_sealed",
+        "amazon_condition": "sellable",
+        "operator_disposition": "restock",
+        "photo_refs": [
+          "photo://UNIT-0115/return-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-016",
+    "unit_id": "UNIT-0116",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 1.5
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0116",
+        "unit_id": "UNIT-0116",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "unknown",
+        "unit_damage": "unknown",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-017",
+    "unit_id": "UNIT-0117",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0117",
+        "unit_id": "UNIT-0117",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0117/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-018",
+    "unit_id": "UNIT-0118",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 14.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0118",
+        "unit_id": "UNIT-0118",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0118/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-019",
+    "unit_id": "UNIT-0119",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 5.1
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0119",
+        "unit_id": "UNIT-0119",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0119",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0119/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-020",
+    "unit_id": "UNIT-0120",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0120",
+        "unit_id": "UNIT-0120",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0120",
+        "identity_match": "yes",
+        "parts_list": "complete",
+        "parts_missing": "",
+        "observed_state": "factory_sealed",
+        "amazon_condition": "sellable",
+        "operator_disposition": "restock",
+        "photo_refs": [
+          "photo://UNIT-0120/return-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-021",
+    "unit_id": "UNIT-0121",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 1.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0121",
+        "unit_id": "UNIT-0121",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "unknown",
+        "unit_damage": "unknown",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-022",
+    "unit_id": "UNIT-0122",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0122",
+        "unit_id": "UNIT-0122",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 44,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0122/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-023",
+    "unit_id": "UNIT-0123",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 12.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0123",
+        "unit_id": "UNIT-0123",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-024",
+    "unit_id": "UNIT-0124",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 6.35
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0124",
+        "unit_id": "UNIT-0124",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0124",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0124/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-025",
+    "unit_id": "UNIT-0125",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0125",
+        "unit_id": "UNIT-0125",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0125",
+        "identity_match": "yes",
+        "parts_list": "complete",
+        "parts_missing": "",
+        "observed_state": "factory_sealed",
+        "amazon_condition": "sellable",
+        "operator_disposition": "restock",
+        "photo_refs": [
+          "photo://UNIT-0125/return-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-026",
+    "unit_id": "UNIT-0126",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 2.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0126",
+        "unit_id": "UNIT-0126",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "yes",
+        "quality_flags": "obvious_defect",
+        "photo_refs": [
+          "photo://UNIT-0126/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-027",
+    "unit_id": "UNIT-0127",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0127",
+        "unit_id": "UNIT-0127",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0127/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-028",
+    "unit_id": "UNIT-0128",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 10.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0128",
+        "unit_id": "UNIT-0128",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0128/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-029",
+    "unit_id": "UNIT-0129",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 6.35
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0129",
+        "unit_id": "UNIT-0129",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0129",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0129/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-030",
+    "unit_id": "UNIT-0130",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0130",
+        "unit_id": "UNIT-0130",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0130",
+        "identity_match": "unknown",
+        "parts_list": "",
+        "parts_missing": "",
+        "observed_state": "",
+        "amazon_condition": "",
+        "operator_disposition": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-031",
+    "unit_id": "UNIT-0131",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 1.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0131",
+        "unit_id": "UNIT-0131",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "unknown",
+        "unit_damage": "unknown",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-032",
+    "unit_id": "UNIT-0132",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0132",
+        "unit_id": "UNIT-0132",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 44,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0132/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-033",
+    "unit_id": "UNIT-0133",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 12.0
+    },
+    "evidence": [
+      {
+        "source": "pack",
+        "record_id": "PK-UNIT-0133",
+        "unit_id": "UNIT-0133",
+        "org_id": "org_eval_heldout",
+        "operator_verdict": "damaged_in_warehouse",
+        "observed_in_box": "damaged",
+        "photo_refs": [
+          "photo://UNIT-0133/pack-damage-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-034",
+    "unit_id": "UNIT-0134",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 4.25
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0134",
+        "unit_id": "UNIT-0134",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0134",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0134/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-035",
+    "unit_id": "UNIT-0135",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0135",
+        "unit_id": "UNIT-0135",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0135",
+        "identity_match": "unknown",
+        "parts_list": "",
+        "parts_missing": "",
+        "observed_state": "",
+        "amazon_condition": "",
+        "operator_disposition": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-036",
+    "unit_id": "UNIT-0136",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 2.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0136",
+        "unit_id": "UNIT-0136",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "unknown",
+        "unit_damage": "unknown",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-037",
+    "unit_id": "UNIT-0137",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0137",
+        "unit_id": "UNIT-0137",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 44,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0137/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-038",
+    "unit_id": "UNIT-0138",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 14.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0138",
+        "unit_id": "UNIT-0138",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0138/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-039",
+    "unit_id": "UNIT-0139",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 5.1
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0139",
+        "unit_id": "UNIT-0139",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0139",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0139/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-040",
+    "unit_id": "UNIT-0140",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0140",
+        "unit_id": "UNIT-0140",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0140",
+        "identity_match": "unknown",
+        "parts_list": "",
+        "parts_missing": "",
+        "observed_state": "",
+        "amazon_condition": "",
+        "operator_disposition": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-041",
+    "unit_id": "UNIT-0141",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 1.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0141",
+        "unit_id": "UNIT-0141",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "unknown",
+        "unit_damage": "unknown",
+        "quality_flags": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-042",
+    "unit_id": "UNIT-0142",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0142",
+        "unit_id": "UNIT-0142",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0142/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-043",
+    "unit_id": "UNIT-0143",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 12.0
+    },
+    "evidence": [
+      {
+        "source": "pack",
+        "record_id": "PK-UNIT-0143",
+        "unit_id": "UNIT-0143",
+        "org_id": "org_eval_heldout",
+        "operator_verdict": "damaged_in_warehouse",
+        "observed_in_box": "damaged",
+        "photo_refs": [
+          "photo://UNIT-0143/pack-damage-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-044",
+    "unit_id": "UNIT-0144",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 6.35
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0144",
+        "unit_id": "UNIT-0144",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0144",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0144/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-045",
+    "unit_id": "UNIT-0145",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0145",
+        "unit_id": "UNIT-0145",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0145",
+        "identity_match": "unknown",
+        "parts_list": "",
+        "parts_missing": "",
+        "observed_state": "",
+        "amazon_condition": "",
+        "operator_disposition": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-046",
+    "unit_id": "UNIT-0146",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "inbound_defect_fee",
+      "amount_usd": 2.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0146",
+        "unit_id": "UNIT-0146",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 48,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "yes",
+        "quality_flags": "obvious_defect",
+        "photo_refs": [
+          "photo://UNIT-0146/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-047",
+    "unit_id": "UNIT-0147",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "lost_inbound",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0147",
+        "unit_id": "UNIT-0147",
+        "org_id": "org_eval_heldout",
+        "qty_ordered": 48,
+        "qty_received": 44,
+        "identity_match": "yes",
+        "carton_damage": "no",
+        "unit_damage": "no",
+        "quality_flags": "",
+        "photo_refs": [
+          "photo://UNIT-0147/receiving-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-048",
+    "unit_id": "UNIT-0148",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "damaged_in_warehouse",
+      "amount_usd": 14.0
+    },
+    "evidence": [
+      {
+        "source": "pack",
+        "record_id": "PK-UNIT-0148",
+        "unit_id": "UNIT-0148",
+        "org_id": "org_eval_heldout",
+        "operator_verdict": "damaged_in_warehouse",
+        "observed_in_box": "damaged",
+        "photo_refs": [
+          "photo://UNIT-0148/pack-damage-1"
+        ]
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-049",
+    "unit_id": "UNIT-0149",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "fulfilment_fee_weight_tier",
+      "amount_usd": 6.35
+    },
+    "evidence": [
+      {
+        "source": "receiving",
+        "record_id": "RCV-UNIT-0149",
+        "unit_id": "UNIT-0149",
+        "org_id": "org_eval_heldout",
+        "sku": "SKU-EVAL-0149",
+        "product_title": "Synthetic evaluation product",
+        "qty_ordered": 1,
+        "qty_received": 1,
+        "photo_refs": [
+          "photo://UNIT-0149/receiving-1"
+        ],
+        "authoritative_weight_kg": null,
+        "authoritative_dimensions_cm": null,
+        "authoritative_fee_tier_schedule": null
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  },
+  {
+    "eval_case_id": "EVAL-050",
+    "unit_id": "UNIT-0150",
+    "org_id": "org_eval_heldout",
+    "charge": {
+      "charge_type": "refund_issued_item_not_returned",
+      "amount_usd": 0.0
+    },
+    "evidence": [
+      {
+        "source": "returns",
+        "record_id": "RTN-UNIT-0150",
+        "unit_id": "UNIT-0150",
+        "org_id": "org_eval_heldout",
+        "order_id": "ORDER-UNIT-0150",
+        "identity_match": "unknown",
+        "parts_list": "",
+        "parts_missing": "",
+        "observed_state": "",
+        "amazon_condition": "",
+        "operator_disposition": "",
+        "photo_refs": []
+      }
+    ],
+    "review_instruction": "Determine whether the available evidence supports recovery, contradicts recovery, or is insufficient for a defensible decision. Do not infer missing authoritative evidence.",
+    "human_label_a": "",
+    "human_label_b": ""
+  }
+]

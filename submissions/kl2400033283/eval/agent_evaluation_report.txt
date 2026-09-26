@@ -1,0 +1,92 @@
+RecoverIQ Held-Out Evaluation Report
+====================================
+
+Cases evaluated: 50
+
+IMPORTANT LIMITATION
+--------------------
+Reviewer labels are synthetic simulations.
+They are NOT independent human ground truth.
+Therefore the results below are protocol measurements,
+not claims of validated real-world accuracy.
+
+Agent vs synthetic reference
+-----------------------------
+Agreement: 46/50 = 0.9200
+Agreement percentage: 92.00%
+
+Reference distribution
+----------------------
+SUPPORTED: 5
+CONTRADICTED: 13
+UNCERTAIN: 32
+
+Agent distribution
+------------------
+SUPPORTED: 9
+CONTRADICTED: 10
+UNCERTAIN: 31
+
+Confusion matrix
+----------------
+Rows = synthetic reference
+Columns = agent decision
+
+                     Agent
+Reference       SUPPORTED  CONTRADICTED  UNCERTAIN
+SUPPORTED               5            0          0
+CONTRADICTED            3           10          0
+UNCERTAIN               1            0         31
+
+Per-case results
+----------------
+EVAL-001 | inbound_defect_fee | reference=SUPPORTED | agent=SUPPORTED | A=SUPPORTED | B=SUPPORTED
+EVAL-002 | lost_inbound | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-003 | damaged_in_warehouse | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-004 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-005 | refund_issued_item_not_returned | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-006 | inbound_defect_fee | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-007 | lost_inbound | reference=UNCERTAIN | agent=SUPPORTED | A=SUPPORTED | B=UNCERTAIN
+EVAL-008 | damaged_in_warehouse | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-009 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-010 | refund_issued_item_not_returned | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-011 | inbound_defect_fee | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-012 | lost_inbound | reference=SUPPORTED | agent=SUPPORTED | A=SUPPORTED | B=SUPPORTED
+EVAL-013 | damaged_in_warehouse | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-014 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-015 | refund_issued_item_not_returned | reference=CONTRADICTED | agent=SUPPORTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-016 | inbound_defect_fee | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-017 | lost_inbound | reference=SUPPORTED | agent=SUPPORTED | A=SUPPORTED | B=SUPPORTED
+EVAL-018 | damaged_in_warehouse | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-019 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-020 | refund_issued_item_not_returned | reference=CONTRADICTED | agent=SUPPORTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-021 | inbound_defect_fee | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-022 | lost_inbound | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-023 | damaged_in_warehouse | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-024 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-025 | refund_issued_item_not_returned | reference=CONTRADICTED | agent=SUPPORTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-026 | inbound_defect_fee | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-027 | lost_inbound | reference=SUPPORTED | agent=SUPPORTED | A=SUPPORTED | B=SUPPORTED
+EVAL-028 | damaged_in_warehouse | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-029 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-030 | refund_issued_item_not_returned | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-031 | inbound_defect_fee | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-032 | lost_inbound | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-033 | damaged_in_warehouse | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-034 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-035 | refund_issued_item_not_returned | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-036 | inbound_defect_fee | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-037 | lost_inbound | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-038 | damaged_in_warehouse | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-039 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-040 | refund_issued_item_not_returned | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-041 | inbound_defect_fee | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-042 | lost_inbound | reference=SUPPORTED | agent=SUPPORTED | A=SUPPORTED | B=SUPPORTED
+EVAL-043 | damaged_in_warehouse | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-044 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-045 | refund_issued_item_not_returned | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-046 | inbound_defect_fee | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-047 | lost_inbound | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-048 | damaged_in_warehouse | reference=CONTRADICTED | agent=CONTRADICTED | A=CONTRADICTED | B=CONTRADICTED
+EVAL-049 | fulfilment_fee_weight_tier | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
+EVAL-050 | refund_issued_item_not_returned | reference=UNCERTAIN | agent=UNCERTAIN | A=UNCERTAIN | B=UNCERTAIN
