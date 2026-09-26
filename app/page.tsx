@@ -68,6 +68,7 @@ export default function Home() {
   const [uploadedFormat, setUploadedFormat] = useState<"CSV" | "JSON" | "API">("API")
   const [evidence, setEvidence] = useState<string[]>([])
   const [decisions, setDecisions] = useState<Map<string, string>>(new Map())
+  const [activeView, setActiveView] = useState<"review" | "reports" | "evidence">("review")
 
   useEffect(() => { fetch("/api/fees").then((response) => response.json()).then(setRows).catch(() => setUploadError("The default fee report could not be loaded.")) }, [])
 
@@ -112,9 +113,9 @@ export default function Home() {
     <aside className="sidebar">
       <div className="brand"><span className="brand-mark">RM</span><span>Recovery Manager</span></div>
       <nav aria-label="Primary navigation" className="nav-list">
-        <a className="nav-item active" href="#review"><span>Review queue</span><strong>{rows.length}</strong></a>
-        <a className="nav-item" href="#reports">Reports</a>
-        <a className="nav-item" href="#evidence">Evidence sources</a>
+        <button className={`nav-item ${activeView === "review" ? "active" : ""}`} type="button" onClick={() => setActiveView("review")}><span>Review queue</span><strong>{rows.length}</strong></button>
+        <button className={`nav-item ${activeView === "reports" ? "active" : ""}`} type="button" onClick={() => setActiveView("reports")}>Reports</button>
+        <button className={`nav-item ${activeView === "evidence" ? "active" : ""}`} type="button" onClick={() => setActiveView("evidence")}>Evidence sources</button>
       </nav>
       <div className="sidebar-note"><span className="status-dot" />Local evidence workspace<div>Files are reviewed before a claim is prepared.</div></div>
     </aside>
@@ -131,13 +132,13 @@ export default function Home() {
         <div className="stat-card"><span>Reported amount</span><strong>{formatMoney(total)}</strong><small>Sum of amount_usd</small></div>
       </section>
 
-      <section className="panel" id="review">
+      <section className={`panel ${activeView !== "review" ? "view-hidden" : ""}`} id="review">
         <div className="panel-heading"><div><h2>Review queue</h2><p>Trace each charge back to the unit and its upstream record.</p></div><span className="record-count">{filteredRows.length} shown</span></div>
         <div className="toolbar"><label className="search"><span className="sr-only">Search records</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search unit, SKU, charge type..." /></label><select value={filter} onChange={(event) => setFilter(event.target.value)} aria-label="Filter by report type"><option value="all">All report types</option><option value="fee_report">Fee reports</option><option value="inventory_adjustment">Inventory adjustments</option><option value="reimbursement_report">Reimbursements</option></select></div>
         <div className="table-wrap"><table><thead><tr><th>Line</th><th>Unit</th><th>Charge</th><th>SKU</th><th>Report</th><th>Amount</th><th>Posted</th><th>Decision</th></tr></thead><tbody>{filteredRows.map((row, index) => { const lineId = field(row, "line_id", "line", "id") || String(index + 1); const unitId = field(row, "unit_id", "unit", "unit id"); const chargeType = field(row, "charge_type", "charge", "charge type"); const sku = field(row, "sku", "item", "item sku"); const reportType = field(row, "report_type", "report type", "type"); const amount = field(row, "amount_usd", "amount", "amount usd"); const postedDate = field(row, "posted_date", "posted", "posted date", "date"); return <tr key={`${lineId}-${index}`}><td className="mono">{lineId}</td><td className="mono">{unitId || "Not provided"}</td><td>{label(chargeType) || "Not provided"}</td><td className="mono">{sku || "Not provided"}</td><td><span className="tag">{label(reportType) || "Uncategorized"}</span></td><td className="amount">{formatMoney(Number(amount.replace(/[$,]/g, "") || 0))}</td><td>{postedDate || "Not provided"}</td><td><span className="decision">{decisions.get(lineId) || field(row, "recovery_decision", "decision", "status") || "Needs review"}</span></td></tr> })}</tbody></table>{!filteredRows.length && <div className="empty">No records match the current search.</div>}</div>
       </section>
 
-      <section className="panel secondary-panel" id="reports" aria-labelledby="reports-heading">
+      <section className={`panel secondary-panel ${activeView !== "reports" ? "view-hidden" : ""}`} id="reports" aria-labelledby="reports-heading">
         <div className="panel-heading"><div><h2 id="reports-heading">Reports</h2><p>Report types currently present in the loaded dataset.</p></div><span className="record-count">{new Set(rows.map((row) => field(row, "report_type", "report type", "type")).filter(Boolean)).size} types</span></div>
         <div className="report-list">
           {Array.from(new Set(rows.map((row) => field(row, "report_type", "report type", "type")).filter(Boolean))).map((reportType) => {
@@ -148,7 +149,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="panel secondary-panel" id="evidence" aria-labelledby="evidence-heading">
+      <section className={`panel secondary-panel ${activeView !== "evidence" ? "view-hidden" : ""}`} id="evidence" aria-labelledby="evidence-heading">
         <div className="panel-heading"><div><h2 id="evidence-heading">Evidence sources</h2><p>Files and fields used to review the current records.</p></div><span className="record-count">{uploadedName ? `${uploadedFormat} upload` : "API dataset"}</span></div>
         <div className="evidence-list">
           <button className="evidence-item" type="button" onClick={() => document.getElementById("review")?.scrollIntoView({ behavior: "smooth" })}><span className="evidence-status" aria-hidden="true" /> <span><strong>{uploadedName || "Current fee report"}</strong><span>{uploadedName ? `Loaded ${rows.length} records from this ${uploadedFormat} file.` : "Records loaded from the fee report API."}</span></span></button>
