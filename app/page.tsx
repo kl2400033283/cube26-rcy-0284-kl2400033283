@@ -140,10 +140,11 @@ export default function Home() {
 
       <section className={`panel secondary-panel ${activeView !== "reports" ? "view-hidden" : ""}`} id="reports" aria-labelledby="reports-heading">
         <div className="panel-heading"><div><h2 id="reports-heading">Reports</h2><p>Report types currently present in the loaded dataset.</p></div><span className="record-count">{new Set(rows.map((row) => field(row, "report_type", "report type", "type")).filter(Boolean)).size} types</span></div>
-        <div className="report-list">
+        <div className="report-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 14, padding: 20 }}>
           {Array.from(new Set(rows.map((row) => field(row, "report_type", "report type", "type")).filter(Boolean))).map((reportType) => {
             const reportRows = rows.filter((row) => field(row, "report_type", "report type", "type") === reportType)
-            return <a className="report-item" href="#review" key={reportType} onClick={() => setFilter(reportType)}><span>{label(reportType)}</span><strong>{reportRows.length} {reportRows.length === 1 ? "row" : "rows"}</strong></a>
+            const reportTotal = reportRows.reduce((sum, row) => sum + Number(field(row, "amount_usd", "amount", "amount usd").replace(/[$,]/g, "") || 0), 0)
+            return <button className="report-card" style={{ minHeight: 170, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 8, padding: 20, textAlign: "left", color: "#e8eceb", background: "#171d1b", border: "1px solid #303a36", borderRadius: 4, cursor: "pointer" }} type="button" key={reportType} onClick={() => { setFilter(reportType); setActiveView("review") }}><span className="card-kicker" style={{ color: "#87a397", fontSize: 10, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase" }}>Report type</span><strong>{label(reportType)}</strong><span className="report-card-meta">{reportRows.length} {reportRows.length === 1 ? "row" : "rows"} <span aria-hidden="true">·</span> {formatMoney(reportTotal)}</span><span className="card-action">View matching records <span aria-hidden="true">→</span></span></button>
           })}
           {!rows.length && <div className="empty">Load a CSV to view its report types.</div>}
         </div>
@@ -151,12 +152,11 @@ export default function Home() {
 
       <section className={`panel secondary-panel ${activeView !== "evidence" ? "view-hidden" : ""}`} id="evidence" aria-labelledby="evidence-heading">
         <div className="panel-heading"><div><h2 id="evidence-heading">Evidence sources</h2><p>Files and fields used to review the current records.</p></div><span className="record-count">{uploadedName ? `${uploadedFormat} upload` : "API dataset"}</span></div>
-        <div className="evidence-list">
-          <button className="evidence-item" type="button" onClick={() => document.getElementById("review")?.scrollIntoView({ behavior: "smooth" })}><span className="evidence-status" aria-hidden="true" /> <span><strong>{uploadedName || "Current fee report"}</strong><span>{uploadedName ? `Loaded ${rows.length} records from this ${uploadedFormat} file.` : "Records loaded from the fee report API."}</span></span></button>
-          <button className="evidence-item" type="button" onClick={() => document.getElementById("reports")?.scrollIntoView({ behavior: "smooth" })}><span className="evidence-status" aria-hidden="true" /> <span><strong>Record fields and checks</strong><span>{evidence.length ? `${evidence.length} evidence references loaded from recovery output.` : "Unit, charge, SKU, report type, amount, and posted date are available when provided."}</span></span></button>
+        <div className="evidence-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14, padding: 20 }}>
+          <button className="evidence-card" style={{ minHeight: 190, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 8, padding: 20, textAlign: "left", color: "#e8eceb", background: "#171d1b", border: "1px solid #303a36", borderRadius: 4, cursor: "pointer" }} type="button" onClick={() => { setActiveView("review"); window.scrollTo({ top: 0, behavior: "smooth" }) }}><span className="evidence-icon" style={{ display: "grid", placeItems: "center", width: 42, height: 30, color: "#b9d8c8", background: "#24332d", border: "1px solid #3c584b", fontSize: 10, fontWeight: 800, letterSpacing: ".06em" }} aria-hidden="true">CSV</span><span className="card-kicker" style={{ color: "#87a397", fontSize: 10, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase" }}>Loaded source</span><strong>{uploadedName || "Current fee report"}</strong><span>{uploadedName ? `Loaded ${rows.length} records from this ${uploadedFormat} file.` : "Records loaded from the fee report API."}</span><span className="card-action">Open review queue <span aria-hidden="true">→</span></span></button>
+          <button className="evidence-card" type="button" onClick={() => { setActiveView("reports"); window.scrollTo({ top: 0, behavior: "smooth" }) }}><span className="evidence-icon" aria-hidden="true">REF</span><span className="card-kicker">Available checks</span><strong>Record fields and checks</strong><span>{evidence.length ? `${evidence.length} evidence references loaded from recovery output.` : "Unit, charge, SKU, report type, amount, and posted date are available when provided."}</span><span className="card-action">View report breakdown <span aria-hidden="true">→</span></span></button>
         </div>
       </section>
       <footer>Recovery Manager only recommends a claim when available evidence supports the charge decision. Unsupported or missing evidence stays in review.</footer>
-    </section>
-  </main>
+    </section>\n  </main>
 }
