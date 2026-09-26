@@ -3,6 +3,7 @@
 import { ChangeEvent, useEffect, useMemo, useState } from "react"
 
 type FeeRow = Record<string, string>
+type ParsedUpload = { rows: FeeRow[]; evidence: string[]; decisions: Map<string, string> }
 
 const formatMoney = (value: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(Number.isFinite(value) ? value : 0)
 const label = (value: unknown) => String(value ?? "").replaceAll("_", " ")
@@ -37,14 +38,38 @@ function parseCsv(text: string): FeeRow[] {
   return records.map((values) => Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""])))
 }
 
+function normalizeJsonUpload(value: unknown): ParsedUpload {
+  const root = value && typeof value === "object" ? value as Record<string, unknown> : {}
+  const rawRows = Array.isArray(value) ? value : (root.recovery_cases ?? root.cases ?? root.rows ?? root.records ?? root.data ?? [])
+  const cases = Array.isArray(rawRows) ? rawRows : []
+  const evidence: string[] = []
+  const decisions = new Map<string, string>()
+  const rows = cases.map((item, index) => {
+    const source: Record<string, unknown> = item && typeof item === "object" ? item as Record<string, unknown> : { value: item }
+    const decision = source.decision && typeof source.decision === "object" ? source.decision as Record<string, unknown> : {}
+    const checks = Array.isArray(source.checks) ? source.checks : []
+    const row = Object.fromEntries(Object.entries(source).filter(([key]) => key !== "decision" && key !== "checks").map(([key, entry]) => [key, typeof entry === "string" ? entry : JSON.stringify(entry)])) as FeeRow
+    const caseId = field(row, "line_id", "case_id", "id") || String(index + 1)
+    const verdict = String(decision.recovery_decision ?? source.recovery_decision ?? source.status ?? "UNCERTAIN")
+    decisions.set(caseId, verdict)
+    const refs = [decision.reason, decision.evidence_reference, ...checks.map((check) => typeof check === "object" && check ? JSON.stringify(check) : String(check))].filter(Boolean).map(String)
+    evidence.push(...refs)
+    return { ...row, case_id: caseId, recovery_decision: verdict, reason: String(decision.reason ?? source.reason ?? "") }
+  })
+  return { rows, evidence: Array.from(new Set(evidence)), decisions }
+}
+
 export default function Home() {
   const [rows, setRows] = useState<FeeRow[]>([])
   const [query, setQuery] = useState("")
   const [filter, setFilter] = useState("all")
   const [uploadedName, setUploadedName] = useState("")
   const [uploadError, setUploadError] = useState("")
+  const [uploadedFormat, setUploadedFormat] = useState<"CSV" | "JSON" | "API">("API")
+  const [evidence, setEvidence] = useState<string[]>([])
+  const [decisions, setDecisions] = useState<Map<string, string>>(new Map())
 
-  useEffect(() => { fetch("/api/fees").then((response) => response.json()).then(setRows) }, [])
+  useEffect(() => { fetch("/api/fees").then((response) => response.json()).then(setRows).catch(() => setUploadError("The default fee report could not be loaded.")) }, [])
 
   const filteredRows = useMemo(() => rows.filter((row) => {
     const matchesQuery = Object.values(row).some((value) => String(value).toLowerCase().includes(query.toLowerCase()))
@@ -61,13 +86,22 @@ export default function Home() {
     const reader = new FileReader()
     setUploadError("")
     reader.onload = () => {
-      const imported = parseCsv(String(reader.result || ""))
-      if (!imported.length) {
-        setUploadError("This file has no data rows. Choose a CSV with a header row and at least one record.")
-        return
+      try {
+        const text = String(reader.result || "")
+        const isJson = file.name.toLowerCase().endsWith(".json") || file.type.includes("json")
+        const imported = isJson ? normalizeJsonUpload(JSON.parse(text)) : { rows: parseCsv(text), evidence: [], decisions: new Map<string, string>() }
+        if (!imported.rows.length) {
+          setUploadError("No records were found. Upload a CSV with headers or recovery_cases.json with a records, cases, or recovery_cases array.")
+          return
+        }
+        setRows(imported.rows)
+        setEvidence(imported.evidence)
+        setDecisions(imported.decisions)
+        setUploadedName(file.name)
+        setUploadedFormat(isJson ? "JSON" : "CSV")
+      } catch {
+        setUploadError("This file could not be parsed. Check that it is valid CSV or JSON.")
       }
-      setRows(imported)
-      setUploadedName(file.name)
     }
     reader.onerror = () => setUploadError("The file could not be read. Please try it again.")
     reader.readAsText(file)
@@ -86,7 +120,7 @@ export default function Home() {
     </aside>
 
     <section className="content">
-      <header className="topbar"><div><p className="eyebrow">Recovery / Review queue</p><h1>Fee lines and evidence</h1></div><label className="upload-button"><span>Upload CSV</span><input type="file" accept=".csv,text/csv" onChange={handleUpload} /></label></header>
+      <header className="topbar"><div><p className="eyebrow">Recovery / Review queue</p><h1>Fee lines and evidence</h1></div><label className="upload-button"><span>Upload CSV or JSON</span><input type="file" accept=".csv,.json,text/csv,application/json" onChange={handleUpload} /></label></header>
       {uploadedName && <div className="notice" role="status">Loaded <strong>{uploadedName}</strong>. Review the imported rows below.</div>}
       {uploadError && <div className="notice error" role="alert">{uploadError}</div>}
 
@@ -100,7 +134,7 @@ export default function Home() {
       <section className="panel" id="review">
         <div className="panel-heading"><div><h2>Review queue</h2><p>Trace each charge back to the unit and its upstream record.</p></div><span className="record-count">{filteredRows.length} shown</span></div>
         <div className="toolbar"><label className="search"><span className="sr-only">Search records</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search unit, SKU, charge type..." /></label><select value={filter} onChange={(event) => setFilter(event.target.value)} aria-label="Filter by report type"><option value="all">All report types</option><option value="fee_report">Fee reports</option><option value="inventory_adjustment">Inventory adjustments</option><option value="reimbursement_report">Reimbursements</option></select></div>
-        <div className="table-wrap"><table><thead><tr><th>Line</th><th>Unit</th><th>Charge</th><th>SKU</th><th>Report</th><th>Amount</th><th>Posted</th><th>Decision</th></tr></thead><tbody>{filteredRows.map((row, index) => { const lineId = field(row, "line_id", "line", "id") || String(index + 1); const unitId = field(row, "unit_id", "unit", "unit id"); const chargeType = field(row, "charge_type", "charge", "charge type"); const sku = field(row, "sku", "item", "item sku"); const reportType = field(row, "report_type", "report type", "type"); const amount = field(row, "amount_usd", "amount", "amount usd"); const postedDate = field(row, "posted_date", "posted", "posted date", "date"); return <tr key={`${lineId}-${index}`}><td className="mono">{lineId}</td><td className="mono">{unitId || "Not provided"}</td><td>{label(chargeType) || "Not provided"}</td><td className="mono">{sku || "Not provided"}</td><td><span className="tag">{label(reportType) || "Uncategorized"}</span></td><td className="amount">{formatMoney(Number(amount.replace(/[$,]/g, "") || 0))}</td><td>{postedDate || "Not provided"}</td><td><span className="decision">Needs review</span></td></tr> })}</tbody></table>{!filteredRows.length && <div className="empty">No records match the current search.</div>}</div>
+        <div className="table-wrap"><table><thead><tr><th>Line</th><th>Unit</th><th>Charge</th><th>SKU</th><th>Report</th><th>Amount</th><th>Posted</th><th>Decision</th></tr></thead><tbody>{filteredRows.map((row, index) => { const lineId = field(row, "line_id", "line", "id") || String(index + 1); const unitId = field(row, "unit_id", "unit", "unit id"); const chargeType = field(row, "charge_type", "charge", "charge type"); const sku = field(row, "sku", "item", "item sku"); const reportType = field(row, "report_type", "report type", "type"); const amount = field(row, "amount_usd", "amount", "amount usd"); const postedDate = field(row, "posted_date", "posted", "posted date", "date"); return <tr key={`${lineId}-${index}`}><td className="mono">{lineId}</td><td className="mono">{unitId || "Not provided"}</td><td>{label(chargeType) || "Not provided"}</td><td className="mono">{sku || "Not provided"}</td><td><span className="tag">{label(reportType) || "Uncategorized"}</span></td><td className="amount">{formatMoney(Number(amount.replace(/[$,]/g, "") || 0))}</td><td>{postedDate || "Not provided"}</td><td><span className="decision">{decisions.get(lineId) || field(row, "recovery_decision", "decision", "status") || "Needs review"}</span></td></tr> })}</tbody></table>{!filteredRows.length && <div className="empty">No records match the current search.</div>}</div>
       </section>
 
       <section className="panel secondary-panel" id="reports" aria-labelledby="reports-heading">
@@ -115,10 +149,10 @@ export default function Home() {
       </section>
 
       <section className="panel secondary-panel" id="evidence" aria-labelledby="evidence-heading">
-        <div className="panel-heading"><div><h2 id="evidence-heading">Evidence sources</h2><p>Files and fields used to review the current records.</p></div><span className="record-count">{uploadedName ? "Uploaded file" : "API dataset"}</span></div>
+        <div className="panel-heading"><div><h2 id="evidence-heading">Evidence sources</h2><p>Files and fields used to review the current records.</p></div><span className="record-count">{uploadedName ? `${uploadedFormat} upload` : "API dataset"}</span></div>
         <div className="evidence-list">
-          <div className="evidence-item"><span className="evidence-status" aria-hidden="true" /> <div><strong>{uploadedName || "Current fee report"}</strong><p>{uploadedName ? "Uploaded CSV currently loaded in this review session." : "Records loaded from the fee report API."}</p></div></div>
-          <div className="evidence-item"><span className="evidence-status" aria-hidden="true" /> <div><strong>Record fields</strong><p>Unit, charge, SKU, report type, amount, and posted date are shown when provided by the source.</p></div></div>
+          <button className="evidence-item" type="button" onClick={() => document.getElementById("review")?.scrollIntoView({ behavior: "smooth" })}><span className="evidence-status" aria-hidden="true" /> <span><strong>{uploadedName || "Current fee report"}</strong><span>{uploadedName ? `Loaded ${rows.length} records from this ${uploadedFormat} file.` : "Records loaded from the fee report API."}</span></span></button>
+          <button className="evidence-item" type="button" onClick={() => document.getElementById("reports")?.scrollIntoView({ behavior: "smooth" })}><span className="evidence-status" aria-hidden="true" /> <span><strong>Record fields and checks</strong><span>{evidence.length ? `${evidence.length} evidence references loaded from recovery output.` : "Unit, charge, SKU, report type, amount, and posted date are available when provided."}</span></span></button>
         </div>
       </section>
       <footer>Recovery Manager only recommends a claim when available evidence supports the charge decision. Unsupported or missing evidence stays in review.</footer>
