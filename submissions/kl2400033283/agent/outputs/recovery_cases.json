@@ -1,12 +1,14 @@
 {
   "agent": "RecoverIQ Recovery Manager",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "schema_version": "1.0",
-  "generated_at": "2026-09-25T14:14:04.107623+00:00",
+  "generated_at": "2026-09-26T05:56:46.413468+00:00",
   "policy": {
     "type": "deterministic_fixture_policy",
-    "model_version": "deterministic-fixture-policy-v0.2",
+    "model_version": "deterministic-fixture-policy-v0.3",
     "conservative_uncertainty": true,
+    "tenant_isolation": "org_id + unit_id",
+    "human_overrides_supported": true,
     "description": "Evidence-first recovery decisioning over synthetic upstream fixtures."
   },
   "input": {
@@ -74,7 +76,8 @@
       "record_id": "FEE-0002-1",
       "schema_version": "1.0",
       "case_id": "FEE-0002-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.404940+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0002-1",
         "report_type": "fee_report",
@@ -93,7 +96,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
       },
       "checks": [
         {
@@ -101,7 +116,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -153,8 +168,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0002",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -218,16 +235,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "84a36e267030e8d245cb8a4f0718920a30c4ef86c785506d8134582417e920ce"
     },
     {
       "record_id": "FEE-0003-1",
       "schema_version": "1.0",
       "case_id": "FEE-0003-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.404940+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0003-1",
         "report_type": "inventory_adjustment",
@@ -246,7 +261,19 @@
         "recovery_decision": "CONTRADICTED",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "Receiving evidence records 44 units received against 48 ordered, indicating a shortage of 4 units."
+        "reason": "Receiving evidence records 44 units received against 48 ordered, indicating a shortage of 4 units.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "CONTRADICTED",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "Receiving evidence records 44 units received against 48 ordered, indicating a shortage of 4 units.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
       },
       "checks": [
         {
@@ -254,7 +281,7 @@
           "verdict": "PASS",
           "confidence": 0.95,
           "detail": "Receiving evidence records 44 units received against 48 ordered, indicating a shortage of 4 units.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -306,8 +333,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0003",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -392,16 +421,14 @@
         "supporting_evidence": [],
         "claim_decision": "CONTRADICTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "41b0d0287babf9bfeb32a23238f10e84070dcbe530edc65d132a863ae6239a26"
     },
     {
       "record_id": "FEE-0003-2",
       "schema_version": "1.0",
       "case_id": "FEE-0003-2",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.404940+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0003-2",
         "report_type": "fee_report",
@@ -420,7 +447,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
       },
       "checks": [
         {
@@ -428,7 +467,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -502,8 +541,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0003",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -590,16 +631,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "0bb5a198a0679b91e75d48b70ca25e05321c8b1b87d8cbd99bdc25c0cc22f9d2"
     },
     {
       "record_id": "FEE-0005-1",
       "schema_version": "1.0",
       "case_id": "FEE-0005-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.404940+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0005-1",
         "report_type": "fee_report",
@@ -618,7 +657,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
       },
       "checks": [
         {
@@ -626,7 +677,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -678,8 +729,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0005",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -743,16 +796,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "6be53e77e3f9779ab60670e11ce6b9d723d2587e6fc38458a4262b2b3af16ed3"
     },
     {
       "record_id": "FEE-0007-1",
       "schema_version": "1.0",
       "case_id": "FEE-0007-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.404940+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0007-1",
         "report_type": "fee_report",
@@ -771,7 +822,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
       },
       "checks": [
         {
@@ -779,7 +842,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -831,8 +894,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0007",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -896,16 +961,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "88d55c85e5a2c9081ecc3dfc3498da501347871c5a5472ead5479cc5ccb8c0f2"
     },
     {
       "record_id": "FEE-0011-1",
       "schema_version": "1.0",
       "case_id": "FEE-0011-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.404940+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0011-1",
         "report_type": "fee_report",
@@ -924,7 +987,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.404940+00:00"
       },
       "checks": [
         {
@@ -932,7 +1007,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -984,8 +1059,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0011",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -1049,16 +1126,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "cdf242373bb739a6a63f31258c14b27de6fc535cee6712374f112bdff9f7cfe2"
     },
     {
       "record_id": "FEE-0012-1",
       "schema_version": "1.0",
       "case_id": "FEE-0012-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0012-1",
         "report_type": "fee_report",
@@ -1077,7 +1152,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -1085,7 +1172,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -1137,8 +1224,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0012",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -1202,16 +1291,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "e6ea156811ea5c2dc256f80e085515aa1cf8cac1e5405f6622e8a24b69d57473"
     },
     {
       "record_id": "FEE-0013-1",
       "schema_version": "1.0",
       "case_id": "FEE-0013-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0013-1",
         "report_type": "fee_report",
@@ -1230,7 +1317,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -1238,7 +1337,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -1290,8 +1389,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0013",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -1355,16 +1456,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "dea102d6848fbd45b3c65d6cdf1b92ed99023a437cdb3bdc0c60b4b8b60da268"
     },
     {
       "record_id": "FEE-0014-1",
       "schema_version": "1.0",
       "case_id": "FEE-0014-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0014-1",
         "report_type": "fee_report",
@@ -1383,7 +1482,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 2.0,
-        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag."
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 2.0,
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -1391,7 +1502,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -1443,8 +1554,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0014",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -1541,16 +1654,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "247ee8a64c91923a62f2f8bb7eb809a1a6a16215c243d84124c7621cd39d1331"
     },
     {
       "record_id": "FEE-0014-2",
       "schema_version": "1.0",
       "case_id": "FEE-0014-2",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0014-2",
         "report_type": "inventory_adjustment",
@@ -1569,7 +1680,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 0.0,
-        "reason": "Receiving evidence records the full ordered quantity (24/24), contradicting a lost-inbound charge."
+        "reason": "Receiving evidence records the full ordered quantity (24/24), contradicting a lost-inbound charge.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 0.0,
+        "reason": "Receiving evidence records the full ordered quantity (24/24), contradicting a lost-inbound charge.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -1577,7 +1700,7 @@
           "verdict": "FAIL",
           "confidence": 0.95,
           "detail": "Receiving evidence records the full ordered quantity (24/24), contradicting a lost-inbound charge.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -1629,8 +1752,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0014",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -1727,16 +1852,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "0681173e64d9bd15882b366ac90985b12daef266710ab7b6bc54a0c18c85bad7"
     },
     {
       "record_id": "FEE-0014-3",
       "schema_version": "1.0",
       "case_id": "FEE-0014-3",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0014-3",
         "report_type": "fee_report",
@@ -1755,7 +1878,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -1763,7 +1898,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -1837,8 +1972,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0014",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -1925,16 +2062,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "fe53e09aeda53db31496d87775fee3bb04368ae82dc67a33bf67276f2b2e9ba8"
     },
     {
       "record_id": "FEE-0014-4",
       "schema_version": "1.0",
       "case_id": "FEE-0014-4",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0014-4",
         "report_type": "fee_report",
@@ -1953,7 +2088,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 0.0,
-        "reason": "A return record exists and the returned item identity matches the ordered SKU."
+        "reason": "A return record exists and the returned item identity matches the ordered SKU.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 0.0,
+        "reason": "A return record exists and the returned item identity matches the ordered SKU.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -1961,7 +2108,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "A return record exists and the returned item identity matches the ordered SKU.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -2013,8 +2160,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0014",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -2111,16 +2260,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "33e7c70b44ec56d0a2ccfef1549b303da150ed625f5bb457319b70ffd5c808fc"
     },
     {
       "record_id": "FEE-0015-1",
       "schema_version": "1.0",
       "case_id": "FEE-0015-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0015-1",
         "report_type": "fee_report",
@@ -2139,7 +2286,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -2147,7 +2306,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -2199,8 +2358,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0015",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -2264,16 +2425,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "8e585723bcb214d43c42a791b7665e115fbb801e0d901c9cb2434391a00f0189"
     },
     {
       "record_id": "FEE-0018-1",
       "schema_version": "1.0",
       "case_id": "FEE-0018-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0018-1",
         "report_type": "fee_report",
@@ -2292,7 +2451,19 @@
         "recovery_decision": "CONTRADICTED",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition."
+        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "CONTRADICTED",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -2300,7 +2471,7 @@
           "verdict": "PASS",
           "confidence": 0.9,
           "detail": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -2352,8 +2523,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0018",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -2438,16 +2611,14 @@
         "supporting_evidence": [],
         "claim_decision": "CONTRADICTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "83073879d96a8c225c68c21d63a66c0c5d7d28460b0ab7c1a5773d793e93b9b1"
     },
     {
       "record_id": "FEE-0018-2",
       "schema_version": "1.0",
       "case_id": "FEE-0018-2",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.406452+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0018-2",
         "report_type": "fee_report",
@@ -2466,7 +2637,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.406452+00:00"
       },
       "checks": [
         {
@@ -2474,7 +2657,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -2548,8 +2731,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0018",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -2636,16 +2821,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "7c6c3d94c73b3379f4c4f61b9aa9a49ce984d470648bc19eaf1d9007cfdac5e9"
     },
     {
       "record_id": "FEE-0024-1",
       "schema_version": "1.0",
       "case_id": "FEE-0024-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0024-1",
         "report_type": "fee_report",
@@ -2664,7 +2847,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -2672,7 +2867,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -2724,8 +2919,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0024",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -2789,16 +2986,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "4ab23dace42afe49b54b7017cab3b7f7be2de74e25e08ea9f8c7d71c6d075622"
     },
     {
       "record_id": "FEE-0025-1",
       "schema_version": "1.0",
       "case_id": "FEE-0025-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0025-1",
         "report_type": "fee_report",
@@ -2817,7 +3012,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -2825,7 +3032,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -2877,8 +3084,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0025",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -2942,16 +3151,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "e59734a4822dbc9064e105476fdb6634b6f4d438809dd61a5a55d60ae20f0d04"
     },
     {
       "record_id": "FEE-0026-1",
       "schema_version": "1.0",
       "case_id": "FEE-0026-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0026-1",
         "report_type": "fee_report",
@@ -2970,7 +3177,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 1.0,
-        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag."
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 1.0,
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -2978,7 +3197,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -3019,8 +3238,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0026",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -3095,16 +3316,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "c2d4e79d62d666830bab13e5aa1b50045e09fc730f1b32cc53c5b970c237aa62"
     },
     {
       "record_id": "FEE-0030-1",
       "schema_version": "1.0",
       "case_id": "FEE-0030-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0030-1",
         "report_type": "fee_report",
@@ -3123,7 +3342,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -3131,7 +3362,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -3205,8 +3436,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0030",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -3293,16 +3526,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "a70a9037102771375740ec17b1e62560cd0e37f745a3d751ca7a93ddfa663ece"
     },
     {
       "record_id": "FEE-0031-1",
       "schema_version": "1.0",
       "case_id": "FEE-0031-1",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0031-1",
         "report_type": "inventory_adjustment",
@@ -3321,7 +3552,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 0.0,
-        "reason": "Receiving evidence records the full ordered quantity (48/48), contradicting a lost-inbound charge."
+        "reason": "Receiving evidence records the full ordered quantity (48/48), contradicting a lost-inbound charge.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 0.0,
+        "reason": "Receiving evidence records the full ordered quantity (48/48), contradicting a lost-inbound charge.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -3329,7 +3572,7 @@
           "verdict": "FAIL",
           "confidence": 0.95,
           "detail": "Receiving evidence records the full ordered quantity (48/48), contradicting a lost-inbound charge.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -3370,8 +3613,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0031",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -3446,16 +3691,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "82a2d3ee9198841ccbb61cdb79143bed3acd86f7d9d293a7a336880b09cfa396"
     },
     {
       "record_id": "FEE-0031-2",
       "schema_version": "1.0",
       "case_id": "FEE-0031-2",
-      "generated_at": "2026-09-25T14:14:04.106619+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0031-2",
         "report_type": "fee_report",
@@ -3474,7 +3717,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -3482,7 +3737,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -3534,8 +3789,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0031",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -3599,16 +3856,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "7f232f2102b62faa41630754cf7cabc2ae0d2604e9300347cb2cfa946330838d"
     },
     {
       "record_id": "FEE-0035-1",
       "schema_version": "1.0",
       "case_id": "FEE-0035-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0035-1",
         "report_type": "fee_report",
@@ -3627,7 +3882,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 0.5,
-        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag."
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 0.5,
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -3635,7 +3902,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -3676,8 +3943,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0035",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -3752,16 +4021,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "9a18aabe36e10b79b924a94b7fd33d75faea23d1b31a55503e5c47cd5ed78980"
     },
     {
       "record_id": "FEE-0035-2",
       "schema_version": "1.0",
       "case_id": "FEE-0035-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0035-2",
         "report_type": "fee_report",
@@ -3780,7 +4047,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -3788,7 +4067,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -3840,8 +4119,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0035",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -3905,16 +4186,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "3c50ce7edf2a8a02f1a9c182a42a521ab1734c744885888e328fa974cb6ca302"
     },
     {
       "record_id": "FEE-0036-1",
       "schema_version": "1.0",
       "case_id": "FEE-0036-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0036-1",
         "report_type": "fee_report",
@@ -3933,7 +4212,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -3941,7 +4232,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -4015,8 +4306,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0036",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -4103,16 +4396,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "834710aa3a3a2af6e7c27219b8e314ae4f041649307bb37b2bcdf38d7adcb2ea"
     },
     {
       "record_id": "FEE-0038-1",
       "schema_version": "1.0",
       "case_id": "FEE-0038-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.407475+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0038-1",
         "report_type": "fee_report",
@@ -4131,7 +4422,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.407475+00:00"
       },
       "checks": [
         {
@@ -4139,7 +4442,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -4213,8 +4516,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0038",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -4301,16 +4606,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "156d81ff4b68d295fffe2e572d0efe160d6be52f08f2c22f65045bb9182c96ef"
     },
     {
       "record_id": "FEE-0038-2",
       "schema_version": "1.0",
       "case_id": "FEE-0038-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0038-2",
         "report_type": "fee_report",
@@ -4329,7 +4632,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 0.0,
-        "reason": "A return record exists and the returned item identity matches the ordered SKU."
+        "reason": "A return record exists and the returned item identity matches the ordered SKU.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 0.0,
+        "reason": "A return record exists and the returned item identity matches the ordered SKU.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -4337,7 +4652,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "A return record exists and the returned item identity matches the ordered SKU.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -4389,8 +4704,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0038",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -4487,16 +4804,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "371047c6288934539b3523dc06e34e93b4e94ee402b7812e6cefb10d9ce20fdf"
     },
     {
       "record_id": "FEE-0039-1",
       "schema_version": "1.0",
       "case_id": "FEE-0039-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0039-1",
         "report_type": "fee_report",
@@ -4515,7 +4830,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -4523,7 +4850,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -4597,8 +4924,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0039",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -4685,16 +5014,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "4e1f04bf643e00a69492509d1db1768d1e72bbc0fdd4f719cb2c36fec45fb85e"
     },
     {
       "record_id": "FEE-0041-1",
       "schema_version": "1.0",
       "case_id": "FEE-0041-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0041-1",
         "report_type": "fee_report",
@@ -4713,7 +5040,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -4721,7 +5060,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -4795,8 +5134,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0041",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -4883,16 +5224,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "ed50285dad7f7245fc382aad0e4e08b146fd7eb3d599ab091de6a242cb8901a4"
     },
     {
       "record_id": "FEE-0041-2",
       "schema_version": "1.0",
       "case_id": "FEE-0041-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0041-2",
         "report_type": "fee_report",
@@ -4911,7 +5250,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 0.0,
-        "reason": "A return record exists and the returned item identity matches the ordered SKU."
+        "reason": "A return record exists and the returned item identity matches the ordered SKU.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 0.0,
+        "reason": "A return record exists and the returned item identity matches the ordered SKU.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -4919,7 +5270,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "A return record exists and the returned item identity matches the ordered SKU.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -4971,8 +5322,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0041",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -5069,16 +5422,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "8389e9beee1535dd8ca5d708aac6da1c610f924144e294e80aac5950453273de"
     },
     {
       "record_id": "FEE-0042-1",
       "schema_version": "1.0",
       "case_id": "FEE-0042-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0042-1",
         "report_type": "fee_report",
@@ -5097,7 +5448,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -5105,7 +5468,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -5157,8 +5520,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0042",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -5222,16 +5587,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "bb8e440d26ed44f35bf7e0a1ded8200a96d3c135c3e7cab67606bdc03aa0a2d7"
     },
     {
       "record_id": "FEE-0048-1",
       "schema_version": "1.0",
       "case_id": "FEE-0048-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0048-1",
         "report_type": "fee_report",
@@ -5250,7 +5613,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -5258,7 +5633,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -5332,8 +5707,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0048",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -5420,16 +5797,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "914aa766bca89d9c63599d2298832633a14f0476e5d34feafc0fe8b250c560f3"
     },
     {
       "record_id": "FEE-0048-2",
       "schema_version": "1.0",
       "case_id": "FEE-0048-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0048-2",
         "report_type": "fee_report",
@@ -5448,7 +5823,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 0.0,
-        "reason": "A return record exists and the returned item identity matches the ordered SKU."
+        "reason": "A return record exists and the returned item identity matches the ordered SKU.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 0.0,
+        "reason": "A return record exists and the returned item identity matches the ordered SKU.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -5456,7 +5843,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "A return record exists and the returned item identity matches the ordered SKU.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -5508,8 +5895,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0048",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -5606,16 +5995,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "c9d2bf272fad6a75725dac0a4fd1dc6c35b4bea3eddc733e1433efd5c20a2b09"
     },
     {
       "record_id": "FEE-0050-1",
       "schema_version": "1.0",
       "case_id": "FEE-0050-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0050-1",
         "report_type": "fee_report",
@@ -5634,7 +6021,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -5642,7 +6041,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -5716,8 +6115,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0050",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -5804,16 +6205,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "86d063a1a3ca6020de6ab28bfac1041815a052af998831d76359553c5d79c935"
     },
     {
       "record_id": "FEE-0051-1",
       "schema_version": "1.0",
       "case_id": "FEE-0051-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.408467+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0051-1",
         "report_type": "fee_report",
@@ -5832,7 +6231,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.408467+00:00"
       },
       "checks": [
         {
@@ -5840,7 +6251,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -5892,8 +6303,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0051",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -5957,16 +6370,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "094bfc3b40e6123c8ab6697b55c1b7a9d503950ae3b000c021c7e56f33bca472"
     },
     {
       "record_id": "FEE-0052-1",
       "schema_version": "1.0",
       "case_id": "FEE-0052-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0052-1",
         "report_type": "fee_report",
@@ -5985,7 +6396,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -5993,7 +6416,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -6045,8 +6468,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0052",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -6110,16 +6535,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "6438d389679e3d2d54d259e43f57e97e95298b7a96816e02f9a98ceb3a350b11"
     },
     {
       "record_id": "FEE-0061-1",
       "schema_version": "1.0",
       "case_id": "FEE-0061-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0061-1",
         "report_type": "fee_report",
@@ -6138,7 +6561,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 2.0,
-        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag."
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 2.0,
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -6146,7 +6581,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -6187,8 +6622,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0061",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -6263,16 +6700,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "d5f3fbe3369f8e32a2b9ec37cbc996030e81f083f751fef9e6a0934ad449a51f"
     },
     {
       "record_id": "FEE-0061-2",
       "schema_version": "1.0",
       "case_id": "FEE-0061-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0061-2",
         "report_type": "fee_report",
@@ -6291,7 +6726,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -6299,7 +6746,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -6351,8 +6798,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0061",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -6416,16 +6865,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "d11eb56a4c6cb184d9bdbbec279b7a409e045e534797efc4011077dece0274f6"
     },
     {
       "record_id": "FEE-0063-1",
       "schema_version": "1.0",
       "case_id": "FEE-0063-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0063-1",
         "report_type": "fee_report",
@@ -6444,7 +6891,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -6452,7 +6911,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -6504,8 +6963,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0063",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -6569,16 +7030,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "02145b20bec1d2dcc63bf1c81e45445dd0b3e3fe6d892dc149ff095af1036103"
     },
     {
       "record_id": "FEE-0064-1",
       "schema_version": "1.0",
       "case_id": "FEE-0064-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0064-1",
         "report_type": "inventory_adjustment",
@@ -6597,7 +7056,19 @@
         "recovery_decision": "CONTRADICTED",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "Receiving evidence records 44 units received against 48 ordered, indicating a shortage of 4 units."
+        "reason": "Receiving evidence records 44 units received against 48 ordered, indicating a shortage of 4 units.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "CONTRADICTED",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "Receiving evidence records 44 units received against 48 ordered, indicating a shortage of 4 units.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -6605,7 +7076,7 @@
           "verdict": "PASS",
           "confidence": 0.95,
           "detail": "Receiving evidence records 44 units received against 48 ordered, indicating a shortage of 4 units.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -6657,8 +7128,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0064",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -6743,16 +7216,14 @@
         "supporting_evidence": [],
         "claim_decision": "CONTRADICTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "2aa9b2cf80ddbd8375593f2f536a1ef9ebc47a432db755fc88802e5ff5c934b4"
     },
     {
       "record_id": "FEE-0064-2",
       "schema_version": "1.0",
       "case_id": "FEE-0064-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0064-2",
         "report_type": "fee_report",
@@ -6771,7 +7242,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -6779,7 +7262,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -6853,8 +7336,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0064",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -6941,16 +7426,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "2fa278f31e905becdc164925af3043072fc8fd90c402beaa049683efce7d34ca"
     },
     {
       "record_id": "FEE-0065-1",
       "schema_version": "1.0",
       "case_id": "FEE-0065-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0065-1",
         "report_type": "fee_report",
@@ -6969,7 +7452,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -6977,7 +7472,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -7029,8 +7524,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0065",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -7094,16 +7591,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "9fe5816bbb6d39ef7fc63ded1f21fa372bf01021ec1dd80d78cdb36749604881"
     },
     {
       "record_id": "FEE-0071-1",
       "schema_version": "1.0",
       "case_id": "FEE-0071-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0071-1",
         "report_type": "fee_report",
@@ -7122,7 +7617,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 1.0,
-        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag."
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 1.0,
+        "reason": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -7130,7 +7637,7 @@
           "verdict": "FAIL",
           "confidence": 0.9,
           "detail": "Receiving evidence shows no recorded carton damage, unit damage, or quality flag.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -7171,8 +7678,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0071",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -7247,16 +7756,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "ef678c686313b388c64a91ee3e5e34542983ce126ac4ca746ccc404f424b4e39"
     },
     {
       "record_id": "FEE-0071-2",
       "schema_version": "1.0",
       "case_id": "FEE-0071-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0071-2",
         "report_type": "reimbursement_report",
@@ -7275,7 +7782,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The available fixture evidence does not provide an authoritative timestamp/location attribution proving that damage occurred in the warehouse. Damage or clean status in receiving/prep alone is insufficient to make this attribution."
+        "reason": "The available fixture evidence does not provide an authoritative timestamp/location attribution proving that damage occurred in the warehouse. Damage or clean status in receiving/prep alone is insufficient to make this attribution.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The available fixture evidence does not provide an authoritative timestamp/location attribution proving that damage occurred in the warehouse. Damage or clean status in receiving/prep alone is insufficient to make this attribution.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -7283,7 +7802,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The available fixture evidence does not provide an authoritative timestamp/location attribution proving that damage occurred in the warehouse. Damage or clean status in receiving/prep alone is insufficient to make this attribution.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -7335,8 +7854,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0071",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -7400,16 +7921,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "cbaf74105b977df3e318d44a77260fc0a73c65eca15a9b9404e9b2b5a9f2bb75"
     },
     {
       "record_id": "FEE-0071-3",
       "schema_version": "1.0",
       "case_id": "FEE-0071-3",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0071-3",
         "report_type": "fee_report",
@@ -7428,7 +7947,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -7436,7 +7967,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -7488,8 +8019,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0071",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -7553,16 +8086,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "d036cc5830ee52b23fff7203a699e12c35fa281fde96c3cea0a483a43b0f594b"
     },
     {
       "record_id": "FEE-0073-1",
       "schema_version": "1.0",
       "case_id": "FEE-0073-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.409470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0073-1",
         "report_type": "fee_report",
@@ -7581,7 +8112,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.409470+00:00"
       },
       "checks": [
         {
@@ -7589,7 +8132,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -7641,8 +8184,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0073",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -7706,16 +8251,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "74d5e28db8865d488aa577a2567a8c89730b4acf812f3b5595ef086d6dbc7f05"
     },
     {
       "record_id": "FEE-0074-1",
       "schema_version": "1.0",
       "case_id": "FEE-0074-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0074-1",
         "report_type": "fee_report",
@@ -7734,7 +8277,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "Receiving identity match is uncertain, so the evidence cannot be safely attributed to the charged unit."
+        "reason": "Receiving identity match is uncertain, so the evidence cannot be safely attributed to the charged unit.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "Receiving identity match is uncertain, so the evidence cannot be safely attributed to the charged unit.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -7742,7 +8297,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.45,
           "detail": "Receiving identity match is uncertain, so the evidence cannot be safely attributed to the charged unit.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -7783,8 +8338,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0074",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -7847,16 +8404,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "56701ebd2cb5d3d9192584a902d20c0beee718d1bbeed3419d0dab3d6f81ac44"
     },
     {
       "record_id": "FEE-0074-2",
       "schema_version": "1.0",
       "case_id": "FEE-0074-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0074-2",
         "report_type": "fee_report",
@@ -7875,7 +8430,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -7883,7 +8450,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -7935,8 +8502,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0074",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -8000,16 +8569,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "b1b7f894cc3d948b52e2fe6dd8f7b8f00c4e61fdfda913d0c19408e11d257bfb"
     },
     {
       "record_id": "FEE-0076-1",
       "schema_version": "1.0",
       "case_id": "FEE-0076-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0076-1",
         "report_type": "inventory_adjustment",
@@ -8028,7 +8595,19 @@
         "recovery_decision": "SUPPORTED",
         "claimable": true,
         "amount_usd": 0.0,
-        "reason": "Receiving evidence records the full ordered quantity (12/12), contradicting a lost-inbound charge."
+        "reason": "Receiving evidence records the full ordered quantity (12/12), contradicting a lost-inbound charge.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "SUPPORTED",
+        "claimable": true,
+        "amount_usd": 0.0,
+        "reason": "Receiving evidence records the full ordered quantity (12/12), contradicting a lost-inbound charge.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -8036,7 +8615,7 @@
           "verdict": "FAIL",
           "confidence": 0.95,
           "detail": "Receiving evidence records the full ordered quantity (12/12), contradicting a lost-inbound charge.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -8077,8 +8656,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0076",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -8153,16 +8734,14 @@
         ],
         "claim_decision": "SUPPORTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "75185941b8348177f648eda90c58f620afc2347d5691e72103c2a3fb9c881a37"
     },
     {
       "record_id": "FEE-0076-2",
       "schema_version": "1.0",
       "case_id": "FEE-0076-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0076-2",
         "report_type": "fee_report",
@@ -8181,7 +8760,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -8189,7 +8780,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -8241,8 +8832,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0076",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -8306,16 +8899,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "40060b223c03595f8b7e8f0022c6188ad62b8e734a91667bb4b0ff7cb595e733"
     },
     {
       "record_id": "FEE-0077-1",
       "schema_version": "1.0",
       "case_id": "FEE-0077-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0077-1",
         "report_type": "fee_report",
@@ -8334,7 +8925,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -8342,7 +8945,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -8394,8 +8997,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0077",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -8459,16 +9064,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "9a82e830f18e33a570c870bb20bea5438f39dff47ae44b9691ba6223f0613bcf"
     },
     {
       "record_id": "FEE-0081-1",
       "schema_version": "1.0",
       "case_id": "FEE-0081-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0081-1",
         "report_type": "fee_report",
@@ -8487,7 +9090,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -8495,7 +9110,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -8569,8 +9184,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0081",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -8657,16 +9274,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "992144ca5c2639886e300470da73729c7403107ae4240bff94c0f8d3aed4df05"
     },
     {
       "record_id": "FEE-0084-1",
       "schema_version": "1.0",
       "case_id": "FEE-0084-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0084-1",
         "report_type": "fee_report",
@@ -8685,7 +9300,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -8693,7 +9320,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -8745,8 +9372,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0084",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -8810,16 +9439,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "59e0c70a551509c57e18acbb097521c6e5831ccf47a214fefe303c212c492fb3"
     },
     {
       "record_id": "FEE-0085-1",
       "schema_version": "1.0",
       "case_id": "FEE-0085-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0085-1",
         "report_type": "fee_report",
@@ -8838,7 +9465,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -8846,7 +9485,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -8898,8 +9537,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0085",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -8963,16 +9604,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "1e0b381a2c1e3798972ff245eba179ba29c9a3c6a8807f20be436cced466c45c"
     },
     {
       "record_id": "FEE-0090-1",
       "schema_version": "1.0",
       "case_id": "FEE-0090-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0090-1",
         "report_type": "fee_report",
@@ -8991,7 +9630,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -8999,7 +9650,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -9051,8 +9702,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0090",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -9116,16 +9769,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "818a728c590e1a4cdeba38c18f8f651843b69ae95802df21f583da98f3e17bec"
     },
     {
       "record_id": "FEE-0092-1",
       "schema_version": "1.0",
       "case_id": "FEE-0092-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0092-1",
         "report_type": "fee_report",
@@ -9144,7 +9795,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -9152,7 +9815,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -9226,8 +9889,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0092",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -9314,16 +9979,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "bd0048cea479aeaecca533eb666ee6a5623a5f7c622c04f2faec48e593ac5283"
     },
     {
       "record_id": "FEE-0093-1",
       "schema_version": "1.0",
       "case_id": "FEE-0093-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.410470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0093-1",
         "report_type": "fee_report",
@@ -9342,7 +10005,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.410470+00:00"
       },
       "checks": [
         {
@@ -9350,7 +10025,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -9424,8 +10099,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0093",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -9512,16 +10189,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "db3578ea624ded3880ffd14a2cea9a1f02f822eb298a4b805ee27dbe752bbc6a"
     },
     {
       "record_id": "FEE-0094-1",
       "schema_version": "1.0",
       "case_id": "FEE-0094-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.411470+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0094-1",
         "report_type": "fee_report",
@@ -9540,7 +10215,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.411470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.411470+00:00"
       },
       "checks": [
         {
@@ -9548,7 +10235,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -9600,8 +10287,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0094",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -9665,16 +10354,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "60acdc563084036cf86cf5ebc3f56ae5aa7562166adbf9b62561e5bab6c1dce5"
     },
     {
       "record_id": "FEE-0095-1",
       "schema_version": "1.0",
       "case_id": "FEE-0095-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.411470+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0095-1",
         "report_type": "fee_report",
@@ -9693,7 +10380,19 @@
         "recovery_decision": "CONTRADICTED",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition."
+        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.411470+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "CONTRADICTED",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.411470+00:00"
       },
       "checks": [
         {
@@ -9701,7 +10400,7 @@
           "verdict": "PASS",
           "confidence": 0.9,
           "detail": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -9742,8 +10441,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0095",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -9806,16 +10507,14 @@
         "supporting_evidence": [],
         "claim_decision": "CONTRADICTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "17e9489374834fac72ebc4f90ef6036a0a2fd1a2f3bbff03f07e68fa709f171a"
     },
     {
       "record_id": "FEE-0095-2",
       "schema_version": "1.0",
       "case_id": "FEE-0095-2",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.412471+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0095-2",
         "report_type": "fee_report",
@@ -9834,7 +10533,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.412471+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.412471+00:00"
       },
       "checks": [
         {
@@ -9842,7 +10553,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -9894,8 +10605,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0095",
+        "charge_to_org": "org_demo_alpha",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -9959,16 +10672,14 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "773a7a355c7ff86190c95a1d10df70b2134b1c803948f133ccff0a30396ae339"
     },
     {
       "record_id": "FEE-0096-1",
       "schema_version": "1.0",
       "case_id": "FEE-0096-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.412471+00:00",
+      "status": "resolved",
       "charge": {
         "line_id": "FEE-0096-1",
         "report_type": "fee_report",
@@ -9987,7 +10698,19 @@
         "recovery_decision": "CONTRADICTED",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition."
+        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.412471+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "CONTRADICTED",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
+        "status": "resolved",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.412471+00:00"
       },
       "checks": [
         {
@@ -9995,7 +10718,7 @@
           "verdict": "PASS",
           "confidence": 0.9,
           "detail": "Receiving evidence contains an observed carton damage, unit damage, or quality issue that supports an inbound defect condition.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -10036,8 +10759,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0096",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -10100,16 +10825,14 @@
         "supporting_evidence": [],
         "claim_decision": "CONTRADICTED"
       },
-      "review": {
-        "required": false,
-        "status": "automated"
-      }
+      "content_hash": "c7ccc606d88034eaeac3f5490d47d2b7071fdd2cd7bcbdca42ec2f18f03a2d25"
     },
     {
       "record_id": "FEE-0099-1",
       "schema_version": "1.0",
       "case_id": "FEE-0099-1",
-      "generated_at": "2026-09-25T14:14:04.107623+00:00",
+      "generated_at": "2026-09-26T05:56:46.412471+00:00",
+      "status": "pending_review",
       "charge": {
         "line_id": "FEE-0099-1",
         "report_type": "fee_report",
@@ -10128,7 +10851,19 @@
         "recovery_decision": "UNCERTAIN",
         "claimable": false,
         "amount_usd": 0.0,
-        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute."
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.412471+00:00"
+      },
+      "outcome": {
+        "recovery_decision": "UNCERTAIN",
+        "claimable": false,
+        "amount_usd": 0.0,
+        "reason": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
+        "status": "pending_review",
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": "2026-09-26T05:56:46.412471+00:00"
       },
       "checks": [
         {
@@ -10136,7 +10871,7 @@
           "verdict": "UNCERTAIN",
           "confidence": 0.0,
           "detail": "The supplied upstream fixture does not contain authoritative measured package weight/dimensions or the authoritative fee-tier schedule required to validate this charge. SKU, quantity, or charged amount must not be used as a substitute.",
-          "model_version": "deterministic-fixture-policy-v0.2",
+          "model_version": "deterministic-fixture-policy-v0.3",
           "latency_ms": 0,
           "evidence_refs": [
             {
@@ -10210,8 +10945,10 @@
           ]
         }
       ],
+      "overrides": [],
       "trace": {
         "charge_to_unit": "UNIT-0099",
+        "charge_to_org": "org_demo_bravo",
         "upstream_evidence": [
           {
             "source": "receiving",
@@ -10298,10 +11035,7 @@
         "supporting_evidence": [],
         "claim_decision": "UNCERTAIN"
       },
-      "review": {
-        "required": true,
-        "status": "pending_review"
-      }
+      "content_hash": "a49da5158cede1d06b290d5743aae226183306ce0d2219e83cb872835e8267f1"
     }
   ]
 }

@@ -10,7 +10,7 @@ Pipeline
 -------
 1. Load fee report.
 2. Load all four upstream evidence sources.
-3. Join evidence by unit_id.
+3. Join evidence by org_id + unit_id (tenant-scoped).
 4. Apply deterministic, charge-specific checks.
 5. Produce traceable Recovery Case Files.
 6. Produce aggregate evaluation metrics.
@@ -45,6 +45,7 @@ evidence.
 
 import csv
 import json
+import hashlib
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -78,10 +79,10 @@ OUTPUT_FILE = OUTPUT_DIR / "recovery_cases.json"
 # ============================================================
 
 AGENT_NAME = "RecoverIQ Recovery Manager"
-AGENT_VERSION = "0.2.0"
+AGENT_VERSION = "0.3.0"
 EVIDENCE_SCHEMA_VERSION = "1.0"
 
-MODEL_VERSION = "deterministic-fixture-policy-v0.2"
+MODEL_VERSION = "deterministic-fixture-policy-v0.3"
 
 
 # ============================================================
@@ -99,21 +100,6 @@ def load_csv(path):
         return list(csv.DictReader(file))
 
 
-def group_by_unit(records):
-    """Group evidence records by unit_id."""
-    grouped = {}
-
-    for record in records:
-        unit_id = clean_value(record.get("unit_id"))
-
-        if not unit_id:
-            continue
-
-        grouped.setdefault(unit_id, []).append(record)
-
-    return grouped
-
-
 def clean_value(value):
     """Normalize empty CSV values."""
     if value is None:
@@ -125,6 +111,27 @@ def clean_value(value):
         return None
 
     return value
+
+
+def group_by_org_and_unit(records):
+    """Group evidence records by org_id and unit_id.
+
+    Tenant isolation rule:
+    evidence is only retrievable when both the organization and
+    unit identifier match the charge being evaluated.
+    """
+    grouped = {}
+
+    for record in records:
+        org_id = clean_value(record.get("org_id"))
+        unit_id = clean_value(record.get("unit_id"))
+
+        if not org_id or not unit_id:
+            continue
+
+        grouped.setdefault((org_id, unit_id), []).append(record)
+
+    return grouped
 
 
 def safe_float(value, default=0.0):
@@ -205,6 +212,51 @@ def evidence_refs_for(source, records):
         evidence_reference(source, record)
         for record in records
     ]
+
+
+def content_hash(payload):
+    """Create a deterministic SHA-256 hash for a JSON-serializable payload."""
+    canonical = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def tenant_isolation_self_test():
+    """Prove that identical unit_ids remain isolated by org_id."""
+    records = [
+        {
+            "record_id": "ISO-ALPHA-1",
+            "org_id": "org_demo_alpha",
+            "unit_id": "UNIT-ISOLATION",
+        },
+        {
+            "record_id": "ISO-BRAVO-1",
+            "org_id": "org_demo_bravo",
+            "unit_id": "UNIT-ISOLATION",
+        },
+    ]
+
+    grouped = group_by_org_and_unit(records)
+
+    alpha = grouped.get(("org_demo_alpha", "UNIT-ISOLATION"), [])
+    bravo = grouped.get(("org_demo_bravo", "UNIT-ISOLATION"), [])
+
+    if [item.get("record_id") for item in alpha] != ["ISO-ALPHA-1"]:
+        raise AssertionError("Tenant isolation failed for org_demo_alpha.")
+
+    if [item.get("record_id") for item in bravo] != ["ISO-BRAVO-1"]:
+        raise AssertionError("Tenant isolation failed for org_demo_bravo.")
+
+    if grouped.get(("org_demo_alpha", "UNIT-ISOLATION")) == grouped.get(
+        ("org_demo_bravo", "UNIT-ISOLATION")
+    ):
+        raise AssertionError("Cross-organization evidence leakage detected.")
+
+    return True
 
 
 # ============================================================
@@ -678,6 +730,8 @@ def build_case(charge, evidence):
 
     claimable = decision == "SUPPORTED"
 
+    generated_at = utc_now()
+
     reason = " ".join(
         check.get("detail", "")
         for check in checks
@@ -692,13 +746,31 @@ def build_case(charge, evidence):
             check.get("evidence_refs", [])
         )
 
+    outcome_status = (
+        "pending_review"
+        if decision == "UNCERTAIN"
+        else "resolved"
+    )
+
+    outcome = {
+        "recovery_decision": decision,
+        "claimable": claimable,
+        "amount_usd": amount if claimable else 0.0,
+        "reason": reason,
+        "status": outcome_status,
+        "decided_by": "deterministic_rule_engine",
+        "decided_at": generated_at,
+    }
+
     case = {
         "record_id": charge.get("line_id"),
         "schema_version": EVIDENCE_SCHEMA_VERSION,
 
         "case_id": charge.get("line_id"),
 
-        "generated_at": utc_now(),
+        "generated_at": generated_at,
+
+        "status": outcome_status,
 
         "charge": {
             "line_id": charge.get("line_id"),
@@ -726,14 +798,22 @@ def build_case(charge, evidence):
                 else 0.0
             ),
             "reason": reason,
+            "status": outcome_status,
+            "decided_by": "deterministic_rule_engine",
+            "decided_at": generated_at,
         },
+
+        "outcome": outcome,
 
         "checks": checks,
 
         "evidence": all_evidence,
 
+        "overrides": [],
+
         "trace": {
             "charge_to_unit": charge.get("unit_id"),
+            "charge_to_org": charge.get("org_id"),
 
             "upstream_evidence": all_evidence,
 
@@ -756,24 +836,17 @@ def build_case(charge, evidence):
 
             "evaluated_evidence": all_evidence,
 
-"supporting_evidence": (
-    supporting_evidence
-    if decision == "SUPPORTED"
-    else []
-),
-
-"claim_decision": decision,
-        },
-
-        "review": {
-            "required": decision == "UNCERTAIN",
-            "status": (
-                "pending_review"
-                if decision == "UNCERTAIN"
-                else "automated"
+            "supporting_evidence": (
+                supporting_evidence
+                if decision == "SUPPORTED"
+                else []
             ),
+
+            "claim_decision": decision,
         },
     }
+
+    case["content_hash"] = content_hash(case)
 
     return case
 
@@ -790,7 +863,7 @@ def load_all_data():
     upstream = {}
 
     for source, path in UPSTREAM_FILES.items():
-        upstream[source] = group_by_unit(
+        upstream[source] = group_by_org_and_unit(
             load_csv(path)
         )
 
@@ -931,21 +1004,21 @@ def run():
     print("RecoverIQ Recovery Manager")
     print("=" * 70)
 
+    tenant_isolation_self_test()
+    print("Tenant isolation test: PASS")
+
     fees, upstream = load_all_data()
 
     cases = []
 
     for charge in fees:
+        org_id = clean_value(charge.get("org_id"))
+        unit_id = clean_value(charge.get("unit_id"))
 
-        unit_id = clean_value(
-            charge.get("unit_id")
-        )
+        evidence_key = (org_id, unit_id)
 
         evidence = {
-            source: records.get(
-                unit_id,
-                []
-            )
+            source: records.get(evidence_key, [])
             for source, records in upstream.items()
         }
 
@@ -968,6 +1041,8 @@ def run():
             "type": "deterministic_fixture_policy",
             "model_version": MODEL_VERSION,
             "conservative_uncertainty": True,
+            "tenant_isolation": "org_id + unit_id",
+            "human_overrides_supported": True,
             "description": (
                 "Evidence-first recovery decisioning over synthetic "
                 "upstream fixtures."
@@ -978,15 +1053,14 @@ def run():
             "fee_rows": len(fees),
 
             "unique_charge_units": len(
-                set(
-                    clean_value(
-                        charge.get("unit_id")
+                {
+                    (
+                        clean_value(charge.get("org_id")),
+                        clean_value(charge.get("unit_id")),
                     )
                     for charge in fees
-                    if clean_value(
-                        charge.get("unit_id")
-                    )
-                )
+                    if clean_value(charge.get("unit_id"))
+                }
             ),
 
             "upstream_sources": list(
