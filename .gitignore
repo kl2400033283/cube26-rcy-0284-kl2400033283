@@ -10,3 +10,5 @@ venv/
 # Private unseen evaluation ground truth
 GROUND_TRUTH_PRIVATE.csv
 **/GROUND_TRUTH_PRIVATE.csv
+
+.vercel
