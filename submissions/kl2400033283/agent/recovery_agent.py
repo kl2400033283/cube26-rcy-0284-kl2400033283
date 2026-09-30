@@ -46,6 +46,7 @@ evidence.
 import csv
 import json
 import hashlib
+import math
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -134,10 +135,41 @@ def group_by_org_and_unit(records):
     return grouped
 
 
+def filter_evidence_for_charge(charge, evidence):
+    """Keep unit evidence whose available identifiers do not conflict."""
+    charge_order_id = clean_value(charge.get("order_id"))
+    charge_shipment_id = clean_value(charge.get("fba_shipment_id"))
+    charge_sku = clean_value(charge.get("sku"))
+    filtered = {}
+
+    for source, records in evidence.items():
+        relevant = []
+        for record in records:
+            record_order_id = clean_value(record.get("order_id"))
+            record_shipment_id = clean_value(record.get("fba_shipment_id"))
+            record_sku = clean_value(
+                record.get("sku") or record.get("ordered_sku")
+            )
+
+            if charge_order_id and record_order_id and charge_order_id != record_order_id:
+                continue
+            if charge_shipment_id and record_shipment_id and charge_shipment_id != record_shipment_id:
+                continue
+            if charge_sku and record_sku and charge_sku != record_sku:
+                continue
+
+            relevant.append(record)
+
+        filtered[source] = relevant
+
+    return filtered
+
+
 def safe_float(value, default=0.0):
     """Safely convert a value to float."""
     try:
-        return float(value)
+        number = float(value)
+        return number if math.isfinite(number) else default
     except (TypeError, ValueError):
         return default
 
@@ -148,6 +180,14 @@ def safe_int(value):
         return int(value)
     except (TypeError, ValueError):
         return None
+
+
+def charge_identifier(charge):
+    for field in ("line_id", "eval_case_id", "charge_id", "id"):
+        identifier = clean_value(charge.get(field))
+        if identifier:
+            return identifier
+    return None
 
 
 # ============================================================
@@ -472,8 +512,9 @@ def return_check(records):
             "UNCERTAIN",
             0.0,
             (
-                "No return evidence is available. Missing evidence "
-                "cannot establish that the item was not returned."
+                "No return evidence matches this charge's available "
+                "identifiers. Missing or unmatched evidence cannot "
+                "establish whether the item was returned."
             ),
         )
 
@@ -713,13 +754,22 @@ def derive_recovery_decision(checks):
 # CASE BUILDING
 # ============================================================
 
-def build_case(charge, evidence):
+def build_case(charge, evidence, duplicate=False):
     """Build one complete Recovery Case File."""
 
-    checks = analyse_charge(
-        charge,
-        evidence
-    )
+    evidence = filter_evidence_for_charge(charge, evidence)
+    line_id = charge_identifier(charge)
+    if duplicate:
+        checks = [
+            make_check(
+                "duplicate_charge",
+                "UNCERTAIN",
+                0.0,
+                f"Charge identifier {line_id} appears more than once for this organization; this duplicate row is not eligible for recovery.",
+            )
+        ]
+    else:
+        checks = analyse_charge(charge, evidence)
 
     decision = derive_recovery_decision(checks)
 
@@ -763,17 +813,17 @@ def build_case(charge, evidence):
     }
 
     case = {
-        "record_id": charge.get("line_id"),
+        "record_id": line_id,
         "schema_version": EVIDENCE_SCHEMA_VERSION,
 
-        "case_id": charge.get("line_id"),
+        "case_id": line_id,
 
         "generated_at": generated_at,
 
         "status": outcome_status,
 
         "charge": {
-            "line_id": charge.get("line_id"),
+            "line_id": line_id,
             "report_type": charge.get("report_type"),
             "charge_type": charge.get("charge_type"),
             "unit_id": charge.get("unit_id"),
@@ -1011,9 +1061,18 @@ def run():
 
     cases = []
 
+    seen_charge_ids = set()
+
     for charge in fees:
         org_id = clean_value(charge.get("org_id"))
         unit_id = clean_value(charge.get("unit_id"))
+        line_id = charge_identifier(charge)
+        duplicate = False
+
+        if org_id and line_id:
+            charge_key = (org_id, line_id)
+            duplicate = charge_key in seen_charge_ids
+            seen_charge_ids.add(charge_key)
 
         evidence_key = (org_id, unit_id)
 
@@ -1024,7 +1083,8 @@ def run():
 
         case = build_case(
             charge,
-            evidence
+            evidence,
+            duplicate=duplicate,
         )
 
         cases.append(case)
