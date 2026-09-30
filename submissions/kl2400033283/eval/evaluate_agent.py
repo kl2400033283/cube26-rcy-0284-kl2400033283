@@ -75,7 +75,7 @@ def agent_decision(row):
 
     if charge_type == "refund_issued_item_not_returned":
         if pattern == "return_confirmed":
-            return "SUPPORTED"
+            return "CONTRADICTED"
         return "UNCERTAIN"
 
     return "UNCERTAIN"

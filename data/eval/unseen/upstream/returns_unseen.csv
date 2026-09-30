@@ -1,0 +1,11 @@
+record_id,unit_id,org_id,order_id,ordered_sku,ordered_asin,identity_match,parts_list,parts_missing,observed_state,amazon_condition,operator_disposition,photo_refs,operator_id,captured_at
+RTN-EVAL-003,UNIT-0103,org_eval_alpha,ORD-EVAL-00003,SKU-TOWEL-BLU,ASIN-EVAL-004,yes,main item,,factory_sealed,sellable,restock,fixtures/eval/returns/UNIT-0103.jpg,op_eval_3,2026-09-05T15:00:00Z
+RTN-EVAL-006,UNIT-0106,org_eval_alpha,ORD-EVAL-00006,SKU-CANDLE-3,ASIN-EVAL-002,yes,main item,,factory_sealed,sellable,restock,fixtures/eval/returns/UNIT-0106.jpg,op_eval_2,2026-09-08T15:00:00Z
+RTN-EVAL-014,UNIT-0114,org_eval_charlie,ORD-EVAL-00014,SKU-PUZZLE-500,ASIN-EVAL-005,yes,main item,,damaged,,liquidate,fixtures/eval/returns/UNIT-0114.jpg,op_eval_2,2026-09-16T15:00:00Z
+RTN-EVAL-017,UNIT-0117,org_eval_charlie,ORD-EVAL-00017,SKU-LAMP-STD,ASIN-EVAL-003,yes,main item,,damaged,,liquidate,fixtures/eval/returns/UNIT-0117.jpg,op_eval_1,2026-09-19T15:00:00Z
+RTN-EVAL-019,UNIT-0119,org_eval_bravo,ORD-EVAL-00019,SKU-PUZZLE-500,ASIN-EVAL-005,yes,main item,,opened_unused,,restock,fixtures/eval/returns/UNIT-0119.jpg,op_eval_3,2026-09-21T15:00:00Z
+RTN-EVAL-023,UNIT-0123,org_eval_charlie,ORD-EVAL-00023,SKU-TOWEL-BLU,ASIN-EVAL-004,yes,main item,,damaged,,liquidate,fixtures/eval/returns/UNIT-0123.jpg,op_eval_3,2026-09-05T15:00:00Z
+RTN-EVAL-029,UNIT-0129,org_eval_charlie,ORD-EVAL-00029,SKU-PUZZLE-500,ASIN-EVAL-005,yes,main item,,damaged,,liquidate,fixtures/eval/returns/UNIT-0129.jpg,op_eval_1,2026-09-11T15:00:00Z
+RTN-EVAL-033,UNIT-0133,org_eval_alpha,ORD-EVAL-00033,SKU-TOWEL-BLU,ASIN-EVAL-004,yes,main item,,factory_sealed,sellable,restock,fixtures/eval/returns/UNIT-0133.jpg,op_eval_1,2026-09-15T15:00:00Z
+RTN-EVAL-042,UNIT-0142,org_eval_alpha,ORD-EVAL-00042,SKU-LAMP-STD,ASIN-EVAL-003,yes,main item,,factory_sealed,sellable,restock,fixtures/eval/returns/UNIT-0142.jpg,op_eval_2,2026-09-04T15:00:00Z
+RTN-EVAL-048,UNIT-0148,org_eval_alpha,ORD-EVAL-00048,SKU-TOWEL-BLU,ASIN-EVAL-004,no,main item,,factory_sealed,sellable,restock,fixtures/eval/returns/UNIT-0148.jpg,op_eval_0,2026-09-10T15:00:00Z

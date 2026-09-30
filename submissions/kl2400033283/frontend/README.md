@@ -1,32 +1,29 @@
-# React + TypeScript + Vite
+# RecoverIQ — Recovery Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+RecoverIQ evaluates fee and reimbursement report rows against structured operational evidence from Receiving, Prep, Pack, and Returns. Every assessment is linked to the available records so reviewers can inspect the evidence before preparing a dispute.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Vite prints the local URL when the development server is ready. To create a production build, run `npm run build`.
+
+## Use the workspace
+
+- The dashboard starts with the included recovery cases and operational evidence.
+- Select **Add report** to upload a fee/reimbursement CSV or JSON report. Evidence CSV/JSON files can be included in the same upload; identify their source in the filename with `receiving`, `prep`, `pack`, or `returns`.
+- Search and filter cases by assessment, charge type, shipment, order, SKU, unit, or case ID.
+- Open a case to inspect the assessment rationale, individual evidence checks, linked source records, and the underlying record fields.
+- Export claim candidates as a JSON review package. Export does not submit a claim.
+
+## Assessment policy
+
+- **Claim candidate** (`SUPPORTED`): evidence supports disputing the charge; the charge amount is a potential claim amount, not a guaranteed recovery.
+- **Charge supported** (`CONTRADICTED`): evidence supports the reported charge; no recovery claim is recommended.
+- **Silent / uncertain** (`UNCERTAIN`): evidence is missing, ambiguous, or insufficient; no claim is recommended.
+- Reimbursed charges explicitly identified in imported data are excluded from new claim packages.
+
+The rule engine is deterministic and uses the records supplied to the workspace. Do not treat sample fixture metrics as independently verified accuracy or recovery outcomes.

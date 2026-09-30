@@ -299,6 +299,40 @@ export function analyseCharge(charge, evidence) {
   ];
 }
 
+function evidenceForCharge(charge, groupedEvidence, upstreamStore) {
+  const orgId = cleanValue(charge.org_id);
+  const unitId = cleanValue(charge.unit_id);
+  if (orgId && unitId) {
+    const key = `${orgId}::${unitId}`;
+    return {
+      receiving: groupedEvidence.receiving[key] || [],
+      prep: groupedEvidence.prep[key] || [],
+      pack: groupedEvidence.pack[key] || [],
+      returns: groupedEvidence.returns[key] || []
+    };
+  }
+
+  const shipmentId = cleanValue(charge.fba_shipment_id);
+  const orderId = cleanValue(charge.order_id);
+  if (!orgId || (!shipmentId && !orderId)) {
+    return { receiving: [], prep: [], pack: [], returns: [] };
+  }
+
+  const evidence = {};
+  for (const source of ['receiving', 'prep', 'pack', 'returns']) {
+    evidence[source] = (upstreamStore[source] || []).filter((record) => {
+      if (cleanValue(record.org_id) !== orgId) return false;
+      const recordShipmentId = cleanValue(record.fba_shipment_id || record.shipment_id);
+      const recordOrderId = cleanValue(record.order_id);
+      const shipmentMatches = Boolean(shipmentId && recordShipmentId === shipmentId);
+      const orderMatches = Boolean(orderId && recordOrderId === orderId);
+      if (!shipmentMatches && !orderMatches) return false;
+      return filterEvidenceForCharge(charge, { [source]: [record] })[source].length > 0;
+    });
+  }
+  return evidence;
+}
+
 export function deriveRecoveryDecision(checks) {
   if (!checks || checks.length === 0) return 'UNCERTAIN';
 
@@ -326,9 +360,20 @@ export function buildCase(charge, evidence, duplicate = false) {
   const checks = duplicate
     ? [makeCheck('duplicate_charge', 'UNCERTAIN', 0.0, `Charge identifier ${lineId} appears more than once for this organization; this duplicate row is not eligible for recovery.`)]
     : analyseCharge(charge, evidence);
+  const rawAmount = cleanValue(charge.amount_usd ?? charge.amount);
+  const parsedAmount = rawAmount === null ? Number.NaN : Number(rawAmount);
+  const amountValid = Number.isFinite(parsedAmount) && parsedAmount >= 0;
+  if (!amountValid) {
+    checks.push(makeCheck(
+      'charge_amount',
+      'UNCERTAIN',
+      0.0,
+      'The charge amount is missing or invalid; a defensible claim amount cannot be established.'
+    ));
+  }
   const decision = deriveRecoveryDecision(checks);
-  const amount = safeFloat(charge.amount_usd || charge.amount, 0.0);
-  const claimable = decision === 'SUPPORTED';
+  const amount = amountValid ? parsedAmount : 0.0;
+  const claimable = decision === 'SUPPORTED' && amountValid;
   const generatedAt = new Date().toISOString();
   const reason = checks.map(c => c.detail).join(' ');
 
@@ -364,7 +409,7 @@ export function buildCase(charge, evidence, duplicate = false) {
     charge: {
       line_id: lineId,
       report_type: cleanValue(charge.report_type) || 'fee_report',
-      charge_type: cleanValue(charge.charge_type) || 'inbound_defect_fee',
+      charge_type: cleanValue(charge.charge_type) || 'unknown',
       unit_id: cleanValue(charge.unit_id) || 'N/A',
       org_id: cleanValue(charge.org_id) || 'org_demo_alpha',
       sku: cleanValue(charge.sku) || 'N/A',
@@ -425,14 +470,7 @@ export function evaluateUnseenDataset(feeRecords, upstreamStore) {
 
     if (chargeKey) seenChargeIds.add(chargeKey);
 
-    const key = `${orgId}::${unitId}`;
-
-    const evidenceForUnit = {
-      receiving: groupedUpstream.receiving[key] || [],
-      prep: groupedUpstream.prep[key] || [],
-      pack: groupedUpstream.pack[key] || [],
-      returns: groupedUpstream.returns[key] || []
-    };
+    const evidenceForUnit = evidenceForCharge(charge, groupedUpstream, upstreamStore);
 
     const caseObj = buildCase(charge, evidenceForUnit, duplicate);
     cases.push(caseObj);
